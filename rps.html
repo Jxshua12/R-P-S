@@ -1,43 +1,59 @@
 <!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rock paper Scissors Game</title>
+    <link rel="stylesheet" href="styles/rps.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>untitled.com</title>
-  <link rel="stylesheet" href="styles/rock-paper-scissors.css" />
-</head>
+  <body>
+    <p class="title">Rock Paper Scissors Game</p>
 
-<body>
-  <p class="title">Rock Paper Scissors Game</p>
+    <button onclick="playGame('Rock')" class="move-button">
+      <img
+        class="move-icon"
+        src="images/rock-emoji.png"
+        alt="A yellow emoji hand displaying the rock move."
+      />
+    </button>
 
-  <button onclick="playGame('Rock')" class="move-button">
-    <img class="move-icon" src="images/rock-emoji.png" alt="A emoji hand displaying the rock move." />
-  </button>
+    <button onclick="playGame('Paper')" class="move-button">
+      <img
+        class="move-icon"
+        src="images/paper-emoji.png"
+        alt="A yellow emoji hand displaying the paper move"
+      />
+    </button>
 
-  <button onclick="playGame('Paper')" class="move-button">
-    <img class="move-icon" src="images/paper-emoji.png" alt="A emoji hand displaying the paper move" />
-  </button>
+    <button onclick="playGame('Scissors')" class="move-button">
+      <img
+        class="move-icon"
+        src="images/scissors-emoji.png"
+        alt="A yellow emoji hand displaying the scissors move"
+      />
+    </button>
 
-  <button onclick="playGame('Scissors')" class="move-button">
-    <img class="move-icon" src="images/scissors-emoji.png" alt="A emoji hand displaying the scissors move" />
-  </button>
+    <p class="js-result" result></p>
+    <p class="js-moves"></p>
+    <p class="js-score score"></p>
 
-  <p class="js-result" result></p>
-  <p class="js-moves"></p>
-  <p class="js-score score"></p>
-
-  <button onclick="
+    <button
+      onclick="
         score.wins = 0;
         score.losses = 0;
         score.ties = 0;
         localStorage.removeItem('score');
         updateScoreElement();
-      " class="reset-score-button">
-    Reset Score
-  </button>
-</body>
+      "
+      class="reset-score-button"
+    >
+      Reset Score
+    </button>
 
-<script src="scripts/rock-paper-scissors.js"></script>
-
+    <button class="auto-play-button" onclick="
+      autoPlay();
+    ">Auto Play</button>
+  </body>
+  <script src="scripts/rps.js"></script>
 </html>
