@@ -19,7 +19,7 @@ let intervalId;
 function autoPlay() {
   // run autoplay
   if (!isAutoPlaying) {
-    intervalId = setInterval(function () {
+    intervalId = setInterval(() => {
       const playerMove = pickComputerMove();
       playGame(playerMove);
     }, 1000);
@@ -31,6 +31,45 @@ function autoPlay() {
     isAutoPlaying = false;
   }
 }
+
+// event listeners
+document.querySelector(".js-rock-button").addEventListener("click", () => {
+  playGame("Rock");
+});
+
+document.querySelector(".js-paper-button").addEventListener("click", () => {
+  playGame("Paper");
+});
+
+document.querySelector(".js-scissors-button").addEventListener("click", () => {
+  playGame("Scissors");
+});
+
+document.querySelector(".js-reset-score-button")
+  .addEventListener("click", () => {
+    score.wins = 0;
+    score.losses = 0;
+    score.ties = 0;
+    localStorage.removeItem("score");
+    updateScoreElement();
+  });
+
+document.querySelector(".js-auto-play-button").addEventListener("click", () => {
+  autoPlay();
+});
+
+// play with your keyboard
+document.body.addEventListener('keydown', (event) => {
+  if (event.key === 'r') {
+    playGame('Rock');
+  } else if (event.key === 'p') {
+    playGame('Paper');
+  } else if (event.key === 's') {
+    playGame('Scissors');
+  }
+});
+
+// player's move
 function playGame(playerMove) {
   const computerMove = pickComputerMove();
 
@@ -87,6 +126,7 @@ function updateScoreElement() {
     `Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`;
 }
 
+// computer's move
 function pickComputerMove() {
   const randomNumber = Math.random();
 
