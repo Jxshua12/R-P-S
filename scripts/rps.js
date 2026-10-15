@@ -25,12 +25,22 @@ function autoPlay() {
     }, 1000);
     // set to true because we are now auto-playing
     isAutoPlaying = true;
+
+    // When the game is auto playing, change
+    // the text in the button to 'Stop Playing'
+    document.querySelector('.js-auto-play-button')
+      .innerHTML = 'Stop Playing';
   } else {
     // stop interval/auto-play
     clearInterval(intervalId);
     isAutoPlaying = false;
-  }
-}
+
+    // when the game is not playing change
+    // the text back to 'Auto Play".
+    document.querySelector('.js-auto-play-button')
+      .innerHTML = 'Auto Play';
+  };
+};
 
 // event listeners
 document.querySelector(".js-rock-button").addEventListener("click", () => {
@@ -47,11 +57,7 @@ document.querySelector(".js-scissors-button").addEventListener("click", () => {
 
 document.querySelector(".js-reset-score-button")
   .addEventListener("click", () => {
-    score.wins = 0;
-    score.losses = 0;
-    score.ties = 0;
-    localStorage.removeItem("score");
-    updateScoreElement();
+    resetScore();
   });
 
 document.querySelector(".js-auto-play-button").addEventListener("click", () => {
@@ -60,13 +66,18 @@ document.querySelector(".js-auto-play-button").addEventListener("click", () => {
 
 // play with your keyboard
 document.body.addEventListener('keydown', (event) => {
+  console.log(event.key);
   if (event.key === 'r') {
     playGame('Rock');
   } else if (event.key === 'p') {
     playGame('Paper');
   } else if (event.key === 's') {
     playGame('Scissors');
-  }
+  } else if (event.key === 'a') {
+    autoPlay();
+  } else if (event.key === 'Backspace') {
+    resetScore();
+  };
 });
 
 // player's move
@@ -140,4 +151,12 @@ function pickComputerMove() {
     computerMove = "Scissors";
   }
   return computerMove;
+}
+
+function resetScore() {
+  score.wins = 0;
+  score.losses = 0;
+  score.ties = 0;
+  localStorage.removeItem('score');
+  updateScoreElement();
 }
